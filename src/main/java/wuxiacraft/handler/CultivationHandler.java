@@ -19,11 +19,15 @@ import wuxiacraft.cultivation.ICultivation;
 import wuxiacraft.cultivation.SystemStats;
 import wuxiacraft.network.CultivationSyncMessage;
 import wuxiacraft.network.WuxiaPacketHandler;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.DamageSource;
 
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CultivationHandler {
+
+	private static final int SYNC_TICK_COUNT = 20;
 
 	@SubscribeEvent
 	public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -60,7 +64,7 @@ public class CultivationHandler {
 		SystemStats divineStats = cultivation.getStatsBySystem(CultivationLevel.System.DIVINE);
 		SystemStats essenceStats = cultivation.getStatsBySystem(CultivationLevel.System.ESSENCE);
 		//sync with client
-		if (cultivation.getTickerTime() >= 100 && !player.world.isRemote) {
+		if (cultivation.getTickerTime() >= SYNC_TICK_COUNT && !player.world.isRemote) {
 			WuxiaPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new CultivationSyncMessage(cultivation));
 			cultivation.resetTickerTimer();
 		}
@@ -106,6 +110,15 @@ public class CultivationHandler {
 				player.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 15, amplifier, true, false));
 				if (relativeAmount < 0.005) {
 					cultivation.setHP(cultivation.getHP() - 1);
+
+					// this is for vanilla statistics
+					event.getEntityLiving().getCombatTracker().trackDamage(DamageSource.GENERIC, (float) cultivation.getHP() + 1, 1);
+					((PlayerEntity) event.getEntityLiving()).addStat(Stats.DAMAGE_TAKEN, 1);
+					((PlayerEntity) event.getEntityLiving()).addExhaustion(1);
+					//
+					if (cultivation.getHP() <= 0) {
+						event.getEntityLiving().setHealth(-1); //it really kills a player
+					}
 				}
 			}
 			if (divineStats.getEnergy() < cultivation.getMaxDivineEnergy() * 0.01) {
@@ -122,6 +135,15 @@ public class CultivationHandler {
 				player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 15, amplifier, false, false));
 				if (relativeAmount < 0.005) {
 					cultivation.setHP(cultivation.getHP() - 1);
+
+					// this is for vanilla statistics
+					event.getEntityLiving().getCombatTracker().trackDamage(DamageSource.GENERIC, (float) cultivation.getHP() + 1, 1);
+					((PlayerEntity) event.getEntityLiving()).addStat(Stats.DAMAGE_TAKEN, 1);
+					((PlayerEntity) event.getEntityLiving()).addExhaustion(1);
+					//
+					if (cultivation.getHP() <= 0) {
+						event.getEntityLiving().setHealth(-1); //it really kills a player
+					}
 				}
 			}
 		}

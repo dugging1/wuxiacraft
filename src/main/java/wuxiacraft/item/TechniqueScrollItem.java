@@ -32,9 +32,9 @@ public class TechniqueScrollItem extends Item {
 		KnownTechnique kt = cultivation.getTechniqueBySystem(technique.getSystem());
 		boolean success = false;
 		if (kt == null) {
-			cultivation.setKnownTechnique(WuxiaTechniques.BASIC_BODY_FORGING_MANUAL, 0);
-			cultivation.setKnownTechnique(WuxiaTechniques.BASIC_QI_GATHERING_TECHNIQUE, 0);
-			cultivation.setKnownTechnique(WuxiaTechniques.BASIC_MENTAL_ENERGY_MANIPULATION, 0);
+			//cultivation.setKnownTechnique(WuxiaTechniques.BASIC_BODY_FORGING_MANUAL, 0);
+			//cultivation.setKnownTechnique(WuxiaTechniques.BASIC_QI_GATHERING_TECHNIQUE, 0);
+			//cultivation.setKnownTechnique(WuxiaTechniques.BASIC_MENTAL_ENERGY_MANIPULATION, 0);
 			cultivation.setKnownTechnique(this.technique, 0);
 			success = true;
 		} else if (kt.getTechnique().getCompatibles().contains(this.technique)) {

@@ -237,10 +237,13 @@ public class Cultivation implements ICultivation {
 		switch (technique.getSystem()) {
 			case BODY:
 				this.bodyTechnique = new KnownTechnique(technique, 0);
+				break;
 			case DIVINE:
 				this.divineTechnique = new KnownTechnique(technique, 0);
+				break;
 			case ESSENCE:
 				this.essenceTechnique = new KnownTechnique(technique, 0);
+				break;
 		}
 	}
 
@@ -361,7 +364,7 @@ public class Cultivation implements ICultivation {
 		if (CultivationLevel.ESSENCE_LEVELS.indexOf(essenceStats.getLevel()) > 2)
 			this.essenceEnergyRegen = 0.00015;
 		else this.essenceEnergyRegen = 0.000005; //this will gather when doing breathing exercises aka cultivating
-		this.healingAmount = 0.0075;
+		this.healingAmount = 0.0015;
 		this.healingCost = 1.8;
 		if (this.bodyTechnique != null) {
 			this.finalModifiers = this.finalModifiers.add(this.bodyTechnique.getModifiers());
