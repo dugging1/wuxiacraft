@@ -66,6 +66,26 @@ public class WuxiaDefaultTechniqueManuals {
 		earth_motion.addGridNode(new Point(0, 1), WuxiaTechniqueAspects.TREMOR.getId(), BigDecimal.TEN);
 		earth_motion.addGridNode(new Point(-1, 1), WuxiaTechniqueAspects.ESSENCE_GATHERING.getId(), BigDecimal.TEN);
 		registerNewManual(new ResourceLocation(WuxiaCraft.MOD_ID, "earth_motion"), 1, earth_motion);
+
+		TechniqueGrid universal_consumption = new TechniqueGrid();
+		universal_consumption.addGridNode(new Point(-1, 0), WuxiaTechniqueAspects.START, BigDecimal.TEN);
+		universal_consumption.addGridNode(new Point(0, 0), WuxiaTechniqueAspects.DEVOURING, BigDecimal.TEN);
+		universal_consumption.addGridNode(new Point(1, 0), WuxiaTechniqueAspects.BODY_GATHERING, BigDecimal.TEN);
+		registerNewManual(new WuxiaDefaultTechniqueManuals(WuxiaCraft.MOD_ID, "universal_consumption"), 1, universal_consumption);
+
+		TechniqueGrid celestial_breathing = new TechniqueGrid();
+		celestial_breathing.addGridNode(new Point(-1,0), WuxiaTechniqueAspects.START, BigDecimal.TEN);
+		celestial_breathing.addGridNode(new Point(0,0), WuxiaTechniqueAspects.STARRY_BATH, BigDecimal.TEN);
+		celestial_breathing.addGridNode(new Point(1,0), WuxiaTechniqueAspects.LEAF, BigDecimal.TEN);
+		celestial_breathing.addGridNode(new Point(1,1), WuxiaTechniqueAspects.LICHEN, BigDecimal.TEN);
+		celestial_breathing.addGridNode(new Point(0,1), WuxiaTechniqueAspects.SWAYING, BigDecimal.TEN);
+		registerNewManual(new WuxiaDefaultTechniqueManuals(WuxiaCraft.MOD_ID, "celestial_breathing"), 1, celestial_breathing);
+
+		TechniqueGrid worldly_blood_burning = new TechniqueGrid();
+		worldly_blood_burning.addGridNode(new Point(-1,0), WuxiaTechniqueAspects.START, BigDecimal.TEN);
+		worldly_blood_burning.addGridNode(new Point(0,0), WuxiaTechniqueAspects.QI_STRAND, BigDecimal.TEN);
+		worldly_blood_burning.addGridNode(new Point(1,0), WuxiaTechniqueAspects.BLOOD_BURNING, BigDecimal.TEN);
+		registerNewManual(new WuxiaDefaultTechniqueManuals(WuxiaCraft.MOD_ID, "worldly_blood_burning"), 1, worldly_blood_burning);
 	}
 
 	public static void registerNewManual(ResourceLocation resourceLocation, int radius, TechniqueGrid grid) {
